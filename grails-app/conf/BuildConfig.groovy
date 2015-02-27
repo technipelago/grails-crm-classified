@@ -13,9 +13,7 @@ grails.project.dependency.resolution = {
     legacyResolve false
     repositories {
         grailsHome()
-        mavenRepo "http://labs.technipelago.se/repo/crm-releases-local/"
         grailsCentral()
-        mavenRepo "http://labs.technipelago.se/repo/plugins-releases-local/"
         mavenCentral()
     }
     dependencies {
