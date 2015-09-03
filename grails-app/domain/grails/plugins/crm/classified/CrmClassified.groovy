@@ -46,6 +46,7 @@ class CrmClassified {
     static transients = ['draft', 'review', 'reject', 'publish', 'archive', 'statusName']
 
     static taggable = true
+    static attachmentable = true
 
     static searchable = {
         only = ['type', 'subject', 'message', 'address']
