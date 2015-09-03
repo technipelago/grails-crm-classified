@@ -21,6 +21,7 @@ import grails.plugins.crm.core.SearchUtils
 import grails.plugins.crm.core.TenantUtils
 import grails.plugins.selection.Selectable
 import org.codehaus.groovy.grails.web.metaclass.BindDynamicMethod
+import org.grails.databinding.SimpleMapDataBindingSource
 
 /**
  * Classified Advertisement Service.
@@ -30,6 +31,8 @@ class CrmClassifiedService {
     def grailsApplication
     def crmCoreService
     def crmTagService
+
+    def grailsWebDataBinder
 
     @Listener(namespace = "crmClassified", topic = "enableFeature")
     def enableFeature(event) {
@@ -50,8 +53,7 @@ class CrmClassifiedService {
         def m = CrmClassified.findBySubjectAndTenantId(params.subject, tenant)
         if (!m) {
             m = new CrmClassified()
-            def args = [m, params, [include: CrmClassified.BIND_WHITELIST]]
-            new BindDynamicMethod().invoke(m, 'bind', args.toArray())
+            grailsWebDataBinder.bind(m, params as SimpleMapDataBindingSource, null, CrmClassified.BIND_WHITELIST, null, null)
             m.tenantId = tenant
             if (params.status == null) {
                 m.status = CrmClassified.STATUS_DRAFT
@@ -129,6 +131,6 @@ class CrmClassifiedService {
 
     List<String> listClassifiedTypes() {
         grailsApplication.config.crm.classified.types ?:
-                ["Köpes", "Säljes", "Önskas hyra", "Uthyres", "Sökes", "Finnes", "Övrigt"]
+                ["Want to buy", "For sale", "Want to rent", "For rent", "Looking for", "For share", "Other"]
     }
 }

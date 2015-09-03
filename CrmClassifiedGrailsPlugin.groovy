@@ -16,8 +16,8 @@
 
 class CrmClassifiedGrailsPlugin {
     def groupId = "grails.crm"
-    def version = "1.3.0"
-    def grailsVersion = "2.2 > *"
+    def version = "1.4.0-SNAPSHOT"
+    def grailsVersion = "2.4 > *"
     def dependsOn = [:]
     def loadAfter = ['crmTags']
     def pluginExcludes = [
